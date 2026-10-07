@@ -31,6 +31,7 @@
       --max:1180px;
       --radius:22px;
       --shadow:0 24px 90px rgba(0,0,0,.42);
+      --lime:#c7ff75;
     }
 
     *{box-sizing:border-box}
@@ -99,6 +100,7 @@
       display:inline-flex;align-items:center;gap:9px;color:#cfd6e1;text-transform:uppercase;
       font-size:.77rem;letter-spacing:.18em;font-weight:700;
     }
+    .eyebrow:after{content:"/ ONLINE";color:var(--lime);font-size:.68rem;letter-spacing:.14em}
     .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 20px var(--cyan)}
     h1{
       margin:19px 0 22px;
@@ -186,6 +188,10 @@
       color:#ccd6e2;font-size:.79rem;
     }
     .badge strong{display:block;color:#fff;font-size:.92rem}
+    .scanline{position:absolute;left:0;right:0;top:42%;height:1px;background:linear-gradient(90deg,transparent,rgba(199,255,117,.7),transparent);box-shadow:0 0 18px rgba(199,255,117,.35);animation:scan 5s ease-in-out infinite}
+    @keyframes scan{0%,100%{transform:translateY(-110px);opacity:0}25%,75%{opacity:.8}50%{transform:translateY(110px)}}
+    .hud-label{position:absolute;top:22px;left:25px;color:var(--lime);font-size:.62rem;letter-spacing:.18em;font-weight:900}
+    .hud-label:before{content:"◈ ";color:var(--cyan)}
 
     section{padding:94px 0}
     .section-head{display:grid;grid-template-columns:.75fr 1.25fr;gap:50px;align-items:end;margin-bottom:34px}
@@ -355,15 +361,17 @@
         <div class="hero-art" aria-hidden="true">
           <div class="visual">
             <div class="planet"></div>
+            <div class="scanline"></div>
+            <div class="hud-label">WORLD BUILD // 001</div>
             <div class="ship">
               <div class="wing"></div>
               <div class="body"></div>
               <div class="glow"></div>
             </div>
             <div class="visual-copy">
-              <div class="visual-kicker">Kibabu Studios</div>
+              <div class="visual-kicker">Kibabu Studios / Signal Found</div>
               <h2>Built to go deeper.</h2>
-              <p>Small-team creativity amplified by modern tools and disciplined iteration.</p>
+              <p>Explore. Systems-link. Ship.</p>
             </div>
           </div>
           <div class="badge-stack">
@@ -379,8 +387,8 @@
       <div class="shell">
         <div class="section-head reveal">
           <div>
-            <div class="section-kicker">Selected releases</div>
-            <h2>Games from<br>Kibabu Studios.</h2>
+            <div class="section-kicker">Game archive / selected releases</div>
+            <h2>Worlds made<br>to be played.</h2>
           </div>
           <p>
             Two released games mark the beginning: deep-sea arcade action and a cozy-sinister descent
@@ -426,8 +434,8 @@
       <div class="shell">
         <div class="section-head reveal">
           <div>
-            <div class="section-kicker">Studio approach</div>
-            <h2>Small studio.<br>Large ambition.</h2>
+            <div class="section-kicker">Build philosophy / studio approach</div>
+            <h2>Small squad.<br>Large worlds.</h2>
           </div>
           <p>
             We combine focused human creative direction with modern AI-assisted workflows to push
@@ -512,8 +520,8 @@
       <div class="shell">
         <div class="section-head reveal">
           <div>
-            <div class="section-kicker">About</div>
-            <h2>Independent by design.</h2>
+            <div class="section-kicker">Player one / about the studio</div>
+            <h2>Independent.<br>Always exploring.</h2>
           </div>
           <p>
             Kibabu Studios is a Massachusetts-based, bootstrapped independent studio building original
