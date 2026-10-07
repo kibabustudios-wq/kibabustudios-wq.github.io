@@ -8,6 +8,10 @@
   <meta property="og:title" content="Kibabu Studios — Independent Game Studio" />
   <meta property="og:description" content="Original games. Atmospheric worlds. AI-native production." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Kibabu Studios" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Kibabu Studios — Independent Game Studio" />
+  <meta name="twitter:description" content="Original games, atmospheric worlds, and AI-native production." />
   <title>Kibabu Studios — Independent Game Studio</title>
 
   <style>
@@ -45,6 +49,9 @@
 
     a{color:inherit}
     button,a{tap-highlight-color:transparent}
+    :focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+    .skip-link{position:absolute;left:12px;top:-60px;z-index:50;padding:10px 14px;border-radius:10px;background:#dffaff;color:#071018;font-weight:800;transition:top .2s ease}
+    .skip-link:focus{top:12px}
     .shell{width:min(var(--max), calc(100% - 40px)); margin-inline:auto}
     .grid-noise{
       pointer-events:none; position:fixed; inset:0; z-index:-1; opacity:.16;
@@ -305,6 +312,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="grid-noise"></div>
   <div class="orb one"></div>
   <div class="orb two"></div>
@@ -326,21 +334,22 @@
     </div>
   </header>
 
-  <main id="top">
+  <main id="main-content">
+    <span id="top" aria-hidden="true"></span>
     <section class="hero">
       <div class="shell hero-inner">
         <div>
-          <div class="eyebrow"><span class="dot"></span> Independent game studio</div>
-          <h1>Worlds with <span class="gradient-text">atmosphere.</span><br>Systems with depth.</h1>
+          <div class="eyebrow"><span class="dot"></span> Independent game studio <span aria-hidden="true">·</span> AI-native development</div>
+          <h1>Original worlds with <span class="gradient-text">a pulse.</span></h1>
           <p class="lead">
-            Kibabu Studios builds original games with a focus on strong mood, layered systems,
-            meaningful exploration, and AI-native production.
+            We build atmospheric games with layered systems, meaningful exploration, and a production
+            pipeline amplified by modern AI tools—directed by a human creative point of view.
           </p>
           <div class="actions">
             <a class="btn primary" href="#games">Explore our games <span aria-hidden="true">→</span></a>
             <a class="btn secondary" href="#approach">How we build</a>
           </div>
-          <p class="micro">Massachusetts · Independent · AI-native</p>
+          <p class="micro">Massachusetts · Independent · Original IP · AI-Native Development</p>
         </div>
 
         <div class="hero-art" aria-hidden="true">
@@ -374,8 +383,8 @@
             <h2>Games from<br>Kibabu Studios.</h2>
           </div>
           <p>
-            From deep-sea arcade action to a cozy-sinister descent beneath a haunted grove,
-            our work explores distinct worlds while keeping gameplay systems at the center.
+            Two released games mark the beginning: deep-sea arcade action and a cozy-sinister descent
+            beneath a haunted grove. Each starts with a distinct world and a clear playable idea.
           </p>
         </div>
 
@@ -461,15 +470,18 @@
           <h2>AI-native development,<br>human-led direction.</h2>
           <div>
             <p>
-              Kibabu Studios uses AI as a development collaborator across planning, programming,
-              codebase reasoning, debugging, testing, production analysis, and creative iteration.
-              The goal is not automation for its own sake—it is stronger execution with a small team.
+              Kibabu Studios uses Claude and connected AI tools as a disciplined production layer across
+              programming, codebase reasoning, debugging, QA, regression testing, production planning,
+              and game-system validation. Human direction stays in control: AI helps us inspect more
+              deeply, iterate faster, and spend more time making the creative calls that define a game.
             </p>
             <div class="principles">
-              <div class="principle">Codebase reasoning</div>
-              <div class="principle">QA & regression analysis</div>
-              <div class="principle">Systems integration</div>
-              <div class="principle">Production iteration</div>
+              <div class="principle">Codebase reasoning & debugging</div>
+              <div class="principle">QA, regression & playtest analysis</div>
+              <div class="principle">Game-system validation</div>
+              <div class="principle">MCP-connected development tools</div>
+              <div class="principle">Production planning</div>
+              <div class="principle">Human-led creative direction</div>
             </div>
           </div>
         </div>
@@ -504,9 +516,10 @@
             <h2>Independent by design.</h2>
           </div>
           <p>
-            Kibabu Studios is an independent game studio based in Massachusetts. We build original
-            interactive experiences across mobile and PC, with a production philosophy centered on
-            atmosphere, systems, iteration, and an expanding AI-assisted development pipeline.
+            Kibabu Studios is a Massachusetts-based, bootstrapped independent studio building original
+            IP across mobile and PC. We are focused on ambitious game development with a production
+            philosophy centered on atmosphere, connected systems, exploration, iteration, and an
+            expanding AI-native workflow.
           </p>
         </div>
       </div>
@@ -518,7 +531,7 @@
         <h2>Build something<br><span class="gradient-text">worth exploring.</span></h2>
         <p>
           For studio inquiries, partnerships, platform opportunities, or development conversations,
-          reach out to Kibabu Studios.
+          reach out to Kibabu Studios while our new company inbox comes online.
         </p>
         <div class="actions" style="justify-content:center">
           <a class="btn primary" href="mailto:ladom82@hotmail.com">Contact the studio →</a>
