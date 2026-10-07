@@ -280,6 +280,20 @@
 
     .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
     .reveal.visible{opacity:1;transform:none}
+    .visual:after{content:"";position:absolute;left:-10%;right:-10%;height:2px;top:35%;background:linear-gradient(90deg,transparent,rgba(199,255,117,.8),transparent);box-shadow:0 0 22px rgba(199,255,117,.5);opacity:.45;animation:scanline 5s ease-in-out infinite}
+    @keyframes scanline{0%,100%{transform:translateY(-120px);opacity:0}20%,80%{opacity:.5}50%{transform:translateY(210px);opacity:.85}}
+    .visual:after{pointer-events:none}
+    .game .art:before{animation:artPulse 9s ease-in-out infinite alternate}
+    @keyframes artPulse{from{opacity:.9;transform:scale(1)}to{opacity:.55;transform:scale(1.08)}}
+    .game:hover .art:after{animation:targetLock 1.2s ease-in-out infinite alternate}
+    @keyframes targetLock{from{transform:rotate(12deg) scale(1);opacity:.45}to{transform:rotate(12deg) scale(1.08);opacity:.85}}
+    .pillar:hover,.dev-card:hover{border-color:rgba(102,229,255,.42);box-shadow:0 0 0 1px rgba(102,229,255,.08),0 18px 55px rgba(0,0,0,.3);transform:translateY(-5px)}
+    .pillar,.dev-card{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+    .btn.primary{position:relative;overflow:hidden}
+    .btn.primary:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.65),transparent 70%);transform:translateX(-120%);transition:transform .6s ease}
+    .btn.primary:hover:after{transform:translateX(120%)}
+    .micro{animation:signalBlink 3.8s steps(2,end) infinite}
+    @keyframes signalBlink{0%,88%,100%{opacity:1}90%,96%{opacity:.42}}
 
     @media (max-width:900px){
       .navlinks a:not(.nav-cta){display:none}
