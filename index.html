@@ -1,592 +1,227 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#07090d" />
-  <meta name="description" content="Kibabu Studios is an independent, AI-native game studio building atmospheric games and ambitious interactive worlds." />
-  <meta property="og:title" content="Kibabu Studios — Independent Game Studio" />
-  <meta property="og:description" content="Original games. Atmospheric worlds. AI-native production." />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Kibabu Studios" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Kibabu Studios — Independent Game Studio" />
-  <meta name="twitter:description" content="Original games, atmospheric worlds, and AI-native production." />
-  <title>Kibabu Studios — Independent Game Studio</title>
-
-  <style>
-    :root{
-      --bg:#07090d;
-      --bg-2:#0b0f17;
-      --panel:rgba(255,255,255,.055);
-      --panel-strong:rgba(255,255,255,.085);
-      --line:rgba(255,255,255,.11);
-      --text:#f4f7fb;
-      --muted:#9ca7b7;
-      --muted-2:#747f90;
-      --cyan:#66e5ff;
-      --blue:#7697ff;
-      --violet:#b083ff;
-      --warm:#ffb968;
-      --max:1180px;
-      --radius:22px;
-      --shadow:0 24px 90px rgba(0,0,0,.42);
-      --lime:#c7ff75;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 15% 8%, rgba(102,229,255,.08), transparent 28rem),
-        radial-gradient(circle at 85% 4%, rgba(176,131,255,.09), transparent 28rem),
-        linear-gradient(180deg,#07090d 0%,#080b12 44%,#07090d 100%);
-      font-family:Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height:1.55;
-      overflow-x:hidden;
-    }
-
-    a{color:inherit}
-    button,a{tap-highlight-color:transparent}
-    :focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
-    .skip-link{position:absolute;left:12px;top:-60px;z-index:50;padding:10px 14px;border-radius:10px;background:#dffaff;color:#071018;font-weight:800;transition:top .2s ease}
-    .skip-link:focus{top:12px}
-    .shell{width:min(var(--max), calc(100% - 40px)); margin-inline:auto}
-    .grid-noise{
-      pointer-events:none; position:fixed; inset:0; z-index:-1; opacity:.16;
-      background-image:
-        linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
-      background-size:42px 42px;
-      mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent 92%);
-    }
-    .orb{
-      position:fixed; width:380px;height:380px;border-radius:50%; filter:blur(85px);
-      opacity:.11; pointer-events:none; z-index:-1; animation:drift 14s ease-in-out infinite alternate;
-    }
-    .orb.one{left:-130px;top:18vh;background:var(--cyan)}
-    .orb.two{right:-150px;top:46vh;background:var(--violet);animation-delay:-7s}
-    @keyframes drift{to{transform:translate3d(45px,32px,0) scale(1.08)}}
-
-    header{
-      position:sticky; top:0; z-index:20;
-      border-bottom:1px solid rgba(255,255,255,.07);
-      background:rgba(7,9,13,.74); backdrop-filter:blur(18px) saturate(1.2);
-    }
-    nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:22px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:780;letter-spacing:.02em}
-    .mark{
-      width:38px;height:38px;border:1px solid rgba(255,255,255,.16);border-radius:11px;
-      display:grid;place-items:center;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.025));
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 8px 28px rgba(0,0,0,.25);
-      position:relative;overflow:hidden;
-    }
-    .mark:before,.mark:after{content:"";position:absolute;background:linear-gradient(135deg,var(--cyan),var(--violet));border-radius:3px}
-    .mark:before{width:7px;height:25px;transform:rotate(42deg)}
-    .mark:after{width:7px;height:19px;transform:translate(5px,4px) rotate(-42deg);opacity:.78}
-    .navlinks{display:flex;gap:26px;align-items:center;color:#c4ccd8;font-size:.94rem}
-    .navlinks a{text-decoration:none;transition:.2s ease}
-    .navlinks a:hover{color:white}
-    .nav-cta{
-      padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.13);
-      background:rgba(255,255,255,.05);
-    }
-
-    .hero{padding:98px 0 72px;position:relative}
-    .hero-inner{min-height:600px;display:grid;grid-template-columns:1.05fr .95fr;gap:66px;align-items:center}
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:9px;color:#cfd6e1;text-transform:uppercase;
-      font-size:.77rem;letter-spacing:.18em;font-weight:700;
-    }
-    .eyebrow:after{content:"/ ONLINE";color:var(--lime);font-size:.68rem;letter-spacing:.14em}
-    .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 20px var(--cyan)}
-    h1{
-      margin:19px 0 22px;
-      font-size:clamp(3.4rem,7vw,7.1rem);line-height:.91;letter-spacing:-.065em;
-      max-width:900px;
-    }
-    .gradient-text{
-      background:linear-gradient(100deg,#fff 5%,#bfefff 42%,#bda9ff 81%);
-      -webkit-background-clip:text;background-clip:text;color:transparent;
-    }
-    .lead{font-size:clamp(1.08rem,1.7vw,1.34rem);max-width:720px;color:#b7c1ce;margin:0 0 32px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:9px;
-      min-height:48px;padding:0 18px;border-radius:13px;text-decoration:none;font-weight:720;
-      border:1px solid rgba(255,255,255,.13);transition:transform .2s ease,border-color .2s ease,background .2s ease;
-    }
-    .btn:hover{transform:translateY(-2px)}
-    .btn.primary{
-      color:#071018;background:linear-gradient(135deg,#b7f4ff,#a8b9ff);
-      border-color:transparent;box-shadow:0 14px 35px rgba(105,200,255,.16)
-    }
-    .btn.secondary{background:rgba(255,255,255,.045)}
-    .micro{margin-top:22px;color:var(--muted-2);font-size:.89rem}
-
-    .hero-art{
-      min-height:520px;position:relative;display:grid;place-items:center;
-      perspective:1200px;
-    }
-    .visual{
-      width:min(100%,470px);aspect-ratio:.86;border-radius:32px;position:relative;overflow:hidden;
-      border:1px solid rgba(255,255,255,.13);box-shadow:var(--shadow);
-      background:
-        radial-gradient(circle at 58% 29%, rgba(102,229,255,.18), transparent 23%),
-        radial-gradient(circle at 35% 75%, rgba(176,131,255,.16), transparent 27%),
-        linear-gradient(145deg,#101722,#090c12 57%,#11101c);
-      transform:rotateY(-6deg) rotateX(2deg);
-      animation:floatCard 7s ease-in-out infinite alternate;
-    }
-    @keyframes floatCard{to{transform:rotateY(-2deg) rotateX(-1deg) translateY(-9px)}}
-    .visual:before{
-      content:"";position:absolute;inset:0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.034) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.034) 1px,transparent 1px);
-      background-size:38px 38px;
-      mask-image:linear-gradient(to bottom,black,transparent 78%);
-    }
-    .planet{
-      position:absolute;width:280px;height:280px;border-radius:50%;right:-65px;top:52px;
-      background:
-        radial-gradient(circle at 34% 32%,rgba(255,255,255,.2),transparent 9%),
-        radial-gradient(circle at 52% 46%,#17394b,#0d2233 43%,#09131d 70%);
-      box-shadow:-22px 28px 90px rgba(69,192,255,.15), inset 28px -20px 55px rgba(0,0,0,.45);
-    }
-    .planet:after{
-      content:"";position:absolute;left:-44px;top:116px;width:360px;height:34px;border:8px solid rgba(133,211,255,.18);
-      border-left-color:rgba(133,211,255,.05);border-right-color:rgba(178,148,255,.22);
-      border-radius:50%;transform:rotate(-16deg);
-    }
-    .ship{
-      position:absolute;left:68px;top:236px;width:155px;height:64px;filter:drop-shadow(0 12px 18px rgba(0,0,0,.5));
-      transform:rotate(-8deg);
-    }
-    .ship .body{
-      position:absolute;inset:18px 24px 12px;background:linear-gradient(90deg,#e8f8ff,#83b9d2 53%,#4d6175);
-      clip-path:polygon(0 45%,68% 0,100% 42%,68% 100%,0 75%,17% 58%);
-    }
-    .ship .wing{
-      position:absolute;left:52px;top:6px;width:74px;height:52px;background:linear-gradient(135deg,#6d84ae,#2e3952);
-      clip-path:polygon(0 45%,100% 0,67% 100%,11% 70%);
-    }
-    .ship .glow{
-      position:absolute;left:8px;top:30px;width:34px;height:8px;border-radius:50%;
-      background:#6feaff;box-shadow:-18px 0 28px #6feaff,-30px 0 42px rgba(111,234,255,.5)
-    }
-    .visual-copy{position:absolute;left:32px;right:32px;bottom:31px}
-    .visual-kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#8eeeff;font-weight:800}
-    .visual h2{font-size:2rem;margin:6px 0 2px;letter-spacing:-.035em}
-    .visual p{color:#91a0b1;margin:0;font-size:.92rem}
-    .badge-stack{position:absolute;right:-25px;bottom:74px;display:grid;gap:10px}
-    .badge{
-      background:rgba(10,13,20,.82);border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(14px);
-      border-radius:14px;padding:11px 13px;box-shadow:0 16px 32px rgba(0,0,0,.25);
-      color:#ccd6e2;font-size:.79rem;
-    }
-    .badge strong{display:block;color:#fff;font-size:.92rem}
-    .scanline{position:absolute;left:0;right:0;top:42%;height:1px;background:linear-gradient(90deg,transparent,rgba(199,255,117,.7),transparent);box-shadow:0 0 18px rgba(199,255,117,.35);animation:scan 5s ease-in-out infinite}
-    @keyframes scan{0%,100%{transform:translateY(-110px);opacity:0}25%,75%{opacity:.8}50%{transform:translateY(110px)}}
-    .hud-label{position:absolute;top:22px;left:25px;color:var(--lime);font-size:.62rem;letter-spacing:.18em;font-weight:900}
-    .hud-label:before{content:"◈ ";color:var(--cyan)}
-
-    section{padding:94px 0}
-    .section-head{display:grid;grid-template-columns:.75fr 1.25fr;gap:50px;align-items:end;margin-bottom:34px}
-    .section-kicker{color:#9aa9ba;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:800}
-    .section-head h2{font-size:clamp(2.3rem,4.3vw,4.5rem);letter-spacing:-.055em;line-height:.98;margin:8px 0 0}
-    .section-head p{color:#9ba7b7;max-width:650px;margin:0 0 4px;font-size:1.03rem}
-
-    .games{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
-    .game{
-      position:relative;min-height:420px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
-      background:var(--panel);box-shadow:0 14px 46px rgba(0,0,0,.18);
-      transition:transform .25s ease,border-color .25s ease;
-    }
-    .game:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.22)}
-    .game .art{position:absolute;inset:0}
-    .game.one .art{
-      background:
-        radial-gradient(circle at 64% 32%,rgba(78,216,255,.25),transparent 13%),
-        radial-gradient(circle at 69% 44%,rgba(40,84,132,.8),transparent 33%),
-        linear-gradient(145deg,#091b2c,#071019 53%,#0a121d);
-    }
-    .game.two .art{
-      background:
-        radial-gradient(circle at 70% 32%,rgba(255,184,95,.18),transparent 17%),
-        radial-gradient(circle at 79% 64%,rgba(121,87,44,.26),transparent 25%),
-        linear-gradient(145deg,#17140f,#0b0e0d 57%,#11151a);
-    }
-    .art:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,6,9,.98) 0%,rgba(5,7,10,.86) 38%,rgba(6,9,13,.18) 78%)}
-    .art:after{
-      content:"";position:absolute;right:8%;top:14%;width:40%;aspect-ratio:1;border-radius:50%;
-      border:1px solid rgba(255,255,255,.12);box-shadow:0 0 0 12px rgba(255,255,255,.018),0 0 0 32px rgba(255,255,255,.012);
-    }
-    .game.two .art:after{border-radius:28% 72% 60% 40%;transform:rotate(12deg);opacity:.55}
-    .game-content{position:absolute;inset:auto 28px 28px 28px;z-index:2;max-width:520px}
-    .tag{display:inline-flex;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);font-size:.75rem;color:#c7d0db}
-    .game h3{font-size:clamp(2rem,3vw,3rem);letter-spacing:-.045em;line-height:1;margin:16px 0 10px}
-    .game p{margin:0 0 17px;color:#9ca9b8}
-    .game a{font-weight:760;text-decoration:none;color:#eaf6ff}
-    .game a:hover{text-decoration:underline}
-
-    .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .pillar{
-      border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
-      border-radius:20px;padding:28px;min-height:265px;
-    }
-    .icon{
-      width:44px;height:44px;border-radius:13px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);
-      display:grid;place-items:center;margin-bottom:28px;font-weight:900;color:#b8efff;
-    }
-    .pillar h3{font-size:1.3rem;margin:0 0 9px;letter-spacing:-.025em}
-    .pillar p{margin:0;color:#929eae;font-size:.95rem}
-
-    .statement{
-      border:1px solid var(--line);border-radius:28px;padding:56px;
-      background:
-        radial-gradient(circle at 92% 18%,rgba(118,151,255,.12),transparent 30%),
-        radial-gradient(circle at 8% 90%,rgba(102,229,255,.07),transparent 32%),
-        rgba(255,255,255,.035);
-      display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;
-    }
-    .statement h2{font-size:clamp(2.4rem,4vw,4.3rem);line-height:.98;letter-spacing:-.055em;margin:0}
-    .statement p{color:#a4afbd;font-size:1.05rem;margin:0}
-    .principles{margin-top:24px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .principle{padding:12px 14px;border:1px solid rgba(255,255,255,.09);border-radius:12px;background:rgba(255,255,255,.025);color:#c4cdd8;font-size:.88rem}
-
-    .dev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .dev-card{
-      min-height:245px;border-radius:20px;padding:25px;border:1px solid var(--line);background:rgba(255,255,255,.035);
-      display:flex;flex-direction:column;justify-content:flex-end;
-    }
-    .dev-card .num{color:#718094;font-weight:800;font-size:.8rem;margin-bottom:auto}
-    .dev-card h3{margin:0 0 7px;font-size:1.4rem}
-    .dev-card p{margin:0;color:#8f9cac;font-size:.92rem}
-
-    .contact{
-      text-align:center;border-top:1px solid rgba(255,255,255,.07);padding:108px 0 110px;
-      background:radial-gradient(circle at 50% 0%,rgba(102,229,255,.07),transparent 32rem);
-    }
-    .contact h2{font-size:clamp(3rem,6vw,6rem);line-height:.93;letter-spacing:-.065em;margin:0 0 20px}
-    .contact p{color:#9faab8;max-width:610px;margin:0 auto 29px}
-    footer{border-top:1px solid rgba(255,255,255,.07);padding:24px 0;color:#747f8f;font-size:.86rem}
-    .foot{display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .footer-links{display:flex;gap:18px}
-    .footer-links a{text-decoration:none}
-    .footer-links a:hover{color:#cbd5df}
-
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
-    .reveal.visible{opacity:1;transform:none}
-    .visual:after{content:"";position:absolute;left:-10%;right:-10%;height:2px;top:35%;background:linear-gradient(90deg,transparent,rgba(199,255,117,.8),transparent);box-shadow:0 0 22px rgba(199,255,117,.5);opacity:.45;animation:scanline 5s ease-in-out infinite}
-    @keyframes scanline{0%,100%{transform:translateY(-120px);opacity:0}20%,80%{opacity:.5}50%{transform:translateY(210px);opacity:.85}}
-    .visual:after{pointer-events:none}
-    .game .art:before{animation:artPulse 9s ease-in-out infinite alternate}
-    @keyframes artPulse{from{opacity:.9;transform:scale(1)}to{opacity:.55;transform:scale(1.08)}}
-    .game:hover .art:after{animation:targetLock 1.2s ease-in-out infinite alternate}
-    @keyframes targetLock{from{transform:rotate(12deg) scale(1);opacity:.45}to{transform:rotate(12deg) scale(1.08);opacity:.85}}
-    .pillar:hover,.dev-card:hover{border-color:rgba(102,229,255,.42);box-shadow:0 0 0 1px rgba(102,229,255,.08),0 18px 55px rgba(0,0,0,.3);transform:translateY(-5px)}
-    .pillar,.dev-card{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
-    .btn.primary{position:relative;overflow:hidden}
-    .btn.primary:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.65),transparent 70%);transform:translateX(-120%);transition:transform .6s ease}
-    .btn.primary:hover:after{transform:translateX(120%)}
-    .micro{animation:signalBlink 3.8s steps(2,end) infinite}
-    @keyframes signalBlink{0%,88%,100%{opacity:1}90%,96%{opacity:.42}}
-
-    @media (max-width:900px){
-      .navlinks a:not(.nav-cta){display:none}
-      .hero{padding-top:64px}
-      .hero-inner,.section-head,.statement{grid-template-columns:1fr}
-      .hero-inner{gap:25px}
-      .hero-art{min-height:460px}
-      .games{grid-template-columns:1fr}
-      .pillars,.dev-grid{grid-template-columns:1fr}
-      .statement{padding:38px 28px}
-      .section-head{gap:16px}
-      .badge-stack{right:8px}
-    }
-    @media (max-width:600px){
-      .shell{width:min(var(--max),calc(100% - 24px))}
-      nav{height:64px}
-      .brand span{font-size:.94rem}
-      .hero{padding-top:48px}
-      .hero-inner{min-height:auto}
-      .hero-art{min-height:410px}
-      .visual{width:92%;border-radius:24px}
-      .badge-stack{display:none}
-      .game{min-height:390px}
-      .game-content{inset:auto 20px 22px}
-      .statement{padding:30px 21px}
-      .principles{grid-template-columns:1fr}
-      section{padding:72px 0}
-      .contact{padding:84px 0}
-      .foot{align-items:flex-start;flex-direction:column}
-    }
-    @media (prefers-reduced-motion:reduce){
-      html{scroll-behavior:auto}
-      *,*:before,*:after{animation:none!important;transition:none!important}
-      .reveal{opacity:1;transform:none}
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d16">
+  <meta name="description" content="Kibabu Studios is an independent, AI-native game studio making atmospheric worlds, expressive systems, and original games. Explore Abyssal Starfighter and Hollowroot.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Kibabu Studios">
+  <meta property="og:title" content="Kibabu Studios — Worlds Worth Getting Lost In">
+  <meta property="og:description" content="Independent game studio. AI-native development. Original worlds built with human imagination at the helm.">
+  <meta property="og:url" content="https://kibabustudios.com/">
+  <meta property="og:image" content="https://kibabustudios.com/assets/hollowroot-cover.jpg">
+  <meta property="og:image:alt" content="Hollowroot: The Last Seed official game artwork by Kibabu Studios">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kibabu Studios — Worlds Worth Getting Lost In">
+  <meta name="twitter:description" content="Independent game studio. AI-native development. Original worlds built with human imagination at the helm.">
+  <meta name="twitter:image" content="https://kibabustudios.com/assets/hollowroot-cover.jpg">
+  <link rel="canonical" href="https://kibabustudios.com/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/script.js" defer></script>
+  <title>Kibabu Studios — Worlds Worth Getting Lost In</title>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div class="grid-noise"></div>
-  <div class="orb one"></div>
-  <div class="orb two"></div>
-
-  <header>
-    <div class="shell">
-      <nav>
-        <a class="brand" href="#top" aria-label="Kibabu Studios home">
-          <span class="mark" aria-hidden="true"></span>
-          <span>KIBABU STUDIOS</span>
-        </a>
-        <div class="navlinks">
-          <a href="#games">Games</a>
-          <a href="#approach">Approach</a>
-          <a href="#development">Development</a>
-          <a class="nav-cta" href="#contact">Contact</a>
-        </div>
-      </nav>
-    </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="page-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header" id="top">
+    <nav class="nav shell" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Kibabu Studios, back to top">
+        <svg class="brand-symbol" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 7v34M8 25 32 7M17 18l23 23M24 27 40 7"/><circle cx="39" cy="10" r="3"/></svg>
+        <span>KIBABU<span>STUDIOS</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">
+        <span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#games">Games</a>
+        <a href="#development">In development</a>
+        <a href="#studio">Studio</a>
+        <a href="#ai">AI + development</a>
+        <a class="nav-contact" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
   </header>
 
-  <main id="main-content">
-    <span id="top" aria-hidden="true"></span>
-    <section class="hero">
-      <div class="shell hero-inner">
-        <div>
-          <div class="eyebrow"><span class="dot"></span> Independent game studio <span aria-hidden="true">·</span> AI-native development</div>
-          <h1>Original worlds with <span class="gradient-text">a pulse.</span></h1>
-          <p class="lead">
-            We build atmospheric games with layered systems, meaningful exploration, and a production
-            pipeline amplified by modern AI tools—directed by a human creative point of view.
-          </p>
-          <div class="actions">
-            <a class="btn primary" href="#games">Explore our games <span aria-hidden="true">→</span></a>
-            <a class="btn secondary" href="#approach">How we build</a>
+  <main id="main">
+    <section class="hero section-dark" id="home" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+      <div class="shell hero-content">
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow"><span class="status-dot"></span> Independent game studio <span class="eyebrow-divider">/</span> Massachusetts</p>
+          <h1 id="hero-title">Worlds worth<br><em>getting lost in.</em></h1>
+          <p class="hero-lede">From the deep blue to the roots below, we make original games with atmosphere, curiosity, and a little beautiful chaos.</p>
+          <p class="hero-positioning">Independent Game Studio <span aria-hidden="true">✦</span> AI-Native Development</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#games">Explore the games <span aria-hidden="true">↘</span></a>
+            <a class="text-link" href="#studio">Meet the studio <span aria-hidden="true">↗</span></a>
           </div>
-          <p class="micro">Massachusetts · Independent · Original IP · AI-Native Development</p>
         </div>
-
-        <div class="hero-art" aria-hidden="true">
-          <div class="visual">
-            <div class="planet"></div>
-            <div class="scanline"></div>
-            <div class="hud-label">WORLD BUILD // 001</div>
-            <div class="ship">
-              <div class="wing"></div>
-              <div class="body"></div>
-              <div class="glow"></div>
-            </div>
-            <div class="visual-copy">
-              <div class="visual-kicker">Kibabu Studios / Signal Found</div>
-              <h2>Built to go deeper.</h2>
-              <p>Explore. Systems-link. Ship.</p>
-            </div>
-          </div>
-          <div class="badge-stack">
-            <div class="badge"><strong>Original IP</strong>Games & worlds</div>
-            <div class="badge"><strong>AI-native</strong>Production workflow</div>
-            <div class="badge"><strong>Independent</strong>Creative direction</div>
-          </div>
+        <div class="hero-stage" aria-label="Artwork from Kibabu Studios games">
+          <a class="hero-poster hero-poster-hollowroot tilt-card" href="https://kibabustudio.itch.io/hollowroot" target="_blank" rel="noopener noreferrer" aria-label="Explore Hollowroot: The Last Seed on itch.io">
+            <img src="/assets/hollowroot-cover.jpg" width="1672" height="941" alt="Hollowroot: The Last Seed official pixel-art cover showing a green forest above an underground world" fetchpriority="high">
+            <span class="poster-tag">01 / Beneath the surface</span>
+          </a>
+          <a class="hero-poster hero-poster-abyssal tilt-card" href="https://apps.apple.com/us/app/abyssal-starfighter-deep-tide/id6771620369" target="_blank" rel="noopener noreferrer" aria-label="Explore Abyssal Starfighter: Deep Tide on the App Store">
+            <img src="/assets/abyssal-icon.jpg" width="512" height="512" alt="Abyssal Starfighter: Deep Tide official game icon" fetchpriority="high">
+            <span class="poster-tag">02 / Into the deep</span>
+          </a>
+          <span class="stage-cross stage-cross-one" aria-hidden="true">✳</span>
+          <span class="stage-cross stage-cross-two" aria-hidden="true">✳</span>
+          <span class="stage-label" aria-hidden="true">PRESS START <span>↗</span></span>
         </div>
       </div>
+      <div class="shell hero-bottom"><span>Scroll to discover</span><span class="scroll-line" aria-hidden="true"></span><span>01 — 06</span></div>
     </section>
 
-    <section id="games">
+    <section class="games-section" id="games" aria-labelledby="games-title">
       <div class="shell">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Game archive / selected releases</div>
-            <h2>Worlds made<br>to be played.</h2>
-          </div>
-          <p>
-            Two released games mark the beginning: deep-sea arcade action and a cozy-sinister descent
-            beneath a haunted grove. Each starts with a distinct world and a clear playable idea.
-          </p>
+        <div class="section-heading reveal">
+          <p class="eyebrow"><span class="asterisk">✳</span> 01 / Released games</p>
+          <h2 id="games-title">Two worlds.<br><em>Two ways in.</em></h2>
+          <p>Built to be played, explored, and remembered.</p>
         </div>
-
-        <div class="games">
-          <article class="game one reveal">
-            <div class="art"></div>
-            <div class="game-content">
-              <span class="tag">Released · Apple App Store</span>
-              <h3>Abyssal Starfighter:<br>Deep Tide</h3>
-              <p>
-                An underwater arcade shooter with fast runs, responsive controls, alien ocean worlds,
-                boss encounters, and cosmetic ship customization.
-              </p>
-              <a href="https://apps.apple.com/us/app/abyssal-starfighter-deep-tide/id6771620369" target="_blank" rel="noopener">
-                View on the App Store →
-              </a>
+      </div>
+      <article class="game-feature abyssal-feature reveal" aria-labelledby="abyssal-title">
+        <div class="shell game-layout">
+          <div class="game-copy">
+            <p class="game-index">01 <span class="index-line"></span> OUT NOW · iOS</p>
+            <div class="game-icon-row"><img src="/assets/abyssal-icon.jpg" width="512" height="512" alt="" loading="lazy"><span>ARCADE ACTION<br>UNDER THE SURFACE</span></div>
+            <h3 id="abyssal-title">Abyssal<br>Starfighter:<br><em>Deep Tide</em></h3>
+            <p>Descend into an alien ocean and fight your way through an underwater arcade shooter. A bright, strange current runs beneath every encounter.</p>
+            <div class="game-tags"><span>Underwater</span><span>Arcade</span><span>Action</span></div>
+            <a class="button button-light" href="https://apps.apple.com/us/app/abyssal-starfighter-deep-tide/id6771620369" target="_blank" rel="noopener noreferrer">View on the App Store <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="abyssal-art">
+            <div class="sonar sonar-one"></div><div class="sonar sonar-two"></div>
+            <div class="gameplay-window tilt-card">
+              <div class="window-top"><span>DEEP TIDE / LIVE FEED</span><span>● ● ●</span></div>
+              <div class="rotated-shot"><img src="/assets/abyssal-gameplay.jpg" width="621" height="1350" alt="Official Abyssal Starfighter gameplay showing colorful pixel ships, enemies, and underwater arcade action" loading="lazy"></div>
+              <span class="window-bottom">SIGNAL 01 <span>◈</span> ABYSSAL DEPTH</span>
             </div>
-          </article>
-
-          <article class="game two reveal">
-            <div class="art"></div>
-            <div class="game-content">
-              <span class="tag">Released · itch.io</span>
-              <h3>Hollowroot:<br>The Last Seed</h3>
-              <p>
-                A cozy-sinister roguelite: tend the Grove, descend through twenty haunted depths,
-                gather resources, craft, fish, farm, and return with what the dark forgot.
-              </p>
-              <a href="https://itch.io/s/199043/hollowroot-the-last-seed" target="_blank" rel="noopener">
-                View on itch.io →
-              </a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="approach">
-      <div class="shell">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Build philosophy / studio approach</div>
-            <h2>Small squad.<br>Large worlds.</h2>
-          </div>
-          <p>
-            We combine focused human creative direction with modern AI-assisted workflows to push
-            what an independent studio can design, build, test, and refine.
-          </p>
-        </div>
-
-        <div class="pillars">
-          <article class="pillar reveal">
-            <div class="icon">01</div>
-            <h3>Atmosphere first</h3>
-            <p>
-              Lighting, sound, weather, environmental motion, framing, and interaction work together
-              so every location feels authored rather than simply filled.
-            </p>
-          </article>
-          <article class="pillar reveal">
-            <div class="icon">02</div>
-            <h3>Systems that connect</h3>
-            <p>
-              We favor mechanics that reinforce one another—exploration, progression, world state,
-              rewards, crafting, movement, and narrative all feeding a larger player experience.
-            </p>
-          </article>
-          <article class="pillar reveal">
-            <div class="icon">03</div>
-            <h3>Iterate with evidence</h3>
-            <p>
-              Inspect, implement, playtest, compare, correct, and verify. Passing work is preserved,
-              regressions are treated seriously, and polish is part of the process—not an afterthought.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="development">
-      <div class="shell">
-        <div class="statement reveal">
-          <h2>AI-native development,<br>human-led direction.</h2>
-          <div>
-            <p>
-              Kibabu Studios uses Claude and connected AI tools as a disciplined production layer across
-              programming, codebase reasoning, debugging, QA, regression testing, production planning,
-              and game-system validation. Human direction stays in control: AI helps us inspect more
-              deeply, iterate faster, and spend more time making the creative calls that define a game.
-            </p>
-            <div class="principles">
-              <div class="principle">Codebase reasoning & debugging</div>
-              <div class="principle">QA, regression & playtest analysis</div>
-              <div class="principle">Game-system validation</div>
-              <div class="principle">MCP-connected development tools</div>
-              <div class="principle">Production planning</div>
-              <div class="principle">Human-led creative direction</div>
-            </div>
+            <span class="art-coordinate" aria-hidden="true">42° 07′ N<br>70° 59′ W</span>
           </div>
         </div>
+      </article>
 
-        <div style="height:18px"></div>
-
-        <div class="dev-grid">
-          <article class="dev-card reveal">
-            <div class="num">IN DEVELOPMENT / 01</div>
-            <h3>Atmospheric worlds</h3>
-            <p>New projects focused on exploration, layered environments, and environmental storytelling.</p>
-          </article>
-          <article class="dev-card reveal">
-            <div class="num">IN DEVELOPMENT / 02</div>
-            <h3>Deeper simulation</h3>
-            <p>Connected gameplay systems designed to make player decisions echo across the world.</p>
-          </article>
-          <article class="dev-card reveal">
-            <div class="num">IN DEVELOPMENT / 03</div>
-            <h3>Agentic production</h3>
-            <p>Internal workflows that help inspect, test, debug, and improve complex game projects.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="shell">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Player one / about the studio</div>
-            <h2>Independent.<br>Always exploring.</h2>
+      <article class="game-feature hollowroot-feature reveal" aria-labelledby="hollowroot-title">
+        <div class="shell hollowroot-layout">
+          <div class="hollowroot-art tilt-card">
+            <img class="hollowroot-cover" src="/assets/hollowroot-cover.jpg" width="1672" height="941" alt="Official Hollowroot: The Last Seed artwork depicting a lush, glowing grove above a mysterious underground world" loading="lazy">
+            <div class="art-sticker" aria-hidden="true">GROW<br>BEYOND<br>THE DARK ↗</div>
+            <span class="art-caption">A world beneath the world.</span>
           </div>
-          <p>
-            Kibabu Studios is a Massachusetts-based, bootstrapped independent studio building original
-            IP across mobile and PC. We are focused on ambitious game development with a production
-            philosophy centered on atmosphere, connected systems, exploration, iteration, and an
-            expanding AI-native workflow.
-          </p>
+          <div class="game-copy">
+            <p class="game-index">02 <span class="index-line"></span> OUT NOW · ITCH.IO</p>
+            <h3 id="hollowroot-title">Hollowroot:<br><em>The Last Seed</em></h3>
+            <p>Step into an evocative pixel-art world of roots, shadows, and renewal. Follow the last seed and see what grows in the dark.</p>
+            <div class="game-tags"><span>Pixel world</span><span>Exploration</span><span>Atmosphere</span></div>
+            <a class="button button-dark" href="https://kibabustudio.itch.io/hollowroot" target="_blank" rel="noopener noreferrer">Play on itch.io <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="development-section" id="development" aria-labelledby="development-title">
+      <div class="shell">
+        <div class="development-intro reveal">
+          <p class="eyebrow"><span class="asterisk">✳</span> 02 / What comes next</p>
+          <h2 id="development-title">Always building<br><em>what's next.</em></h2>
+          <p>New projects are in development. We're following curiosity into atmospheric worlds where exploration, simulation, and story collide.</p>
+        </div>
+        <div class="development-grid">
+          <div class="development-card reveal">
+            <span class="card-number">01 / WORLD</span>
+            <div class="card-illustration world-illustration" aria-hidden="true"><span class="world-planet"></span><span class="world-ring"></span><span class="world-spark">✳</span></div>
+            <h3>Atmosphere you can feel.</h3>
+            <p>Distinct places, environmental storytelling, and the pull to see what's beyond the horizon.</p>
+          </div>
+          <div class="development-card reveal">
+            <span class="card-number">02 / SYSTEM</span>
+            <div class="card-illustration system-illustration" aria-hidden="true"><span class="system-node n1"></span><span class="system-node n2"></span><span class="system-node n3"></span><span class="system-node n4"></span><span class="system-link l1"></span><span class="system-link l2"></span><span class="system-link l3"></span></div>
+            <h3>Systems that surprise.</h3>
+            <p>Interconnected mechanics, meaningful feedback, and room for unexpected moments to emerge.</p>
+          </div>
+          <div class="development-card reveal">
+            <span class="card-number">03 / STORY</span>
+            <div class="card-illustration story-illustration" aria-hidden="true"><span class="story-door"></span><span class="story-light"></span><span class="story-star">✦</span></div>
+            <h3>Stories you make your own.</h3>
+            <p>Narrative experiences shaped by discovery, choice, and the details players carry with them.</p>
+          </div>
+        </div>
+        <p class="development-note reveal"><span class="status-dot"></span> Exploring new 2D and 3D possibilities · More when they're ready.</p>
+      </div>
+    </section>
+
+    <section class="studio-section" id="studio" aria-labelledby="studio-title">
+      <div class="shell studio-layout">
+        <div class="studio-heading reveal">
+          <p class="eyebrow"><span class="asterisk">✳</span> 03 / The studio</p>
+          <h2 id="studio-title">Small studio.<br><em>Big worlds.</em></h2>
+          <div class="studio-mark" aria-hidden="true">K<span>✳</span></div>
+        </div>
+        <div class="studio-body reveal">
+          <p class="studio-lead">Kibabu Studios is an independent, bootstrapped game studio based in Massachusetts.</p>
+          <p>We make original IP with a hands-on, experimental spirit. Our work moves between worlds and genres, but the throughline is the same: games with a point of view, built to reward curiosity.</p>
+          <p>Creative direction stays human. We use modern tools to work more thoughtfully, test more often, and spend more time on the details that make a world feel alive.</p>
+          <div class="studio-facts"><span>Independent</span><span>Massachusetts-based</span><span>Original IP</span><span>AI-native</span></div>
         </div>
       </div>
     </section>
 
-    <section class="contact" id="contact">
-      <div class="shell reveal">
-        <div class="section-kicker">Kibabu Studios</div>
-        <h2>Build something<br><span class="gradient-text">worth exploring.</span></h2>
-        <p>
-          For studio inquiries, partnerships, platform opportunities, or development conversations,
-          reach out to Kibabu Studios at our company inbox.
-        </p>
-        <div class="actions" style="justify-content:center">
-          <a class="btn primary" href="mailto:larry@kibabustudios.com">Contact the studio →</a>
-          <a class="btn secondary" href="https://github.com/kibabustudios-wq" target="_blank" rel="noopener">GitHub</a>
+    <section class="ai-section" id="ai" aria-labelledby="ai-title">
+      <div class="shell ai-layout">
+        <div class="ai-copy reveal">
+          <p class="eyebrow"><span class="asterisk">✳</span> 04 / How we build</p>
+          <h2 id="ai-title">Human vision.<br><em>New velocity.</em></h2>
+          <p class="ai-lede">AI is part of our production toolkit—not the author of our games. We use Claude and connected tools to move ideas through code, testing, and refinement while keeping creative decisions in human hands.</p>
+          <div class="ai-principle"><span aria-hidden="true">↳</span> The point isn't to make more noise. It's to make better games.</div>
         </div>
+        <div class="ai-console reveal" aria-label="Explore our AI-native development workflow">
+          <div class="console-head"><span>BUILD LOOP / 001</span><span class="console-signal"><span class="status-dot"></span> HUMAN-LED</span></div>
+          <div class="console-nav" role="group" aria-label="Development stages">
+            <button class="console-step active" type="button" data-step="think" aria-pressed="true"><span>01</span> Think</button>
+            <button class="console-step" type="button" data-step="build" aria-pressed="false"><span>02</span> Build</button>
+            <button class="console-step" type="button" data-step="test" aria-pressed="false"><span>03</span> Test</button>
+            <button class="console-step" type="button" data-step="refine" aria-pressed="false"><span>04</span> Refine</button>
+          </div>
+          <div class="console-screen" aria-live="polite">
+            <div class="console-visual" aria-hidden="true"><span class="console-core">✳</span><span class="orbit-ring orbit-one"></span><span class="orbit-ring orbit-two"></span><span class="orbit-dot dot-one"></span><span class="orbit-dot dot-two"></span></div>
+            <p class="console-kicker" id="console-kicker">01 / THINK</p>
+            <h3 id="console-title">Reason through the possibility.</h3>
+            <p id="console-description">We use Claude for codebase reasoning, production planning, and validating game-system ideas before committing to a direction.</p>
+          </div>
+          <div class="console-foot"><span>CLAUDE + CODE + MCP-CONNECTED TOOLS</span><span>↻ ITERATE</span></div>
+        </div>
+      </div>
+      <div class="shell ai-capabilities reveal"><span>PROGRAMMING</span><span>DEBUGGING</span><span>QA + REGRESSION</span><span>SYSTEM VALIDATION</span><span>ITERATIVE TESTING</span></div>
+    </section>
+
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="shell contact-layout">
+        <div class="reveal">
+          <p class="eyebrow"><span class="asterisk">✳</span> 05 / Say hello</p>
+          <h2 id="contact-title">Got a world<br><em>in mind?</em></h2>
+          <p>Players, publishers, platform partners, and fellow makers—we'd love to hear from you.</p>
+          <a class="contact-email" href="mailto:larry@kibabustudios.com">larry@kibabustudios.com <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="contact-glyph reveal" aria-hidden="true"><span>✳</span><span>KIBABU<br>STUDIOS</span></div>
       </div>
     </section>
   </main>
-
-  <footer>
-    <div class="shell foot">
-      <div>© <span id="year"></span> Kibabu Studios. All rights reserved.</div>
-      <div class="footer-links">
-        <a href="#games">Games</a>
-        <a href="#approach">Approach</a>
-        <a href="#contact">Contact</a>
-      </div>
+  <footer class="site-footer">
+    <div class="shell footer-layout">
+      <a class="footer-brand" href="#home">KIBABU<span>STUDIOS</span></a>
+      <p>Independent worlds, made with intention.</p>
+      <div class="footer-links"><a href="#games">Games</a><a href="https://github.com/kibabustudios-wq" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="mailto:larry@kibabustudios.com">Email ↗</a></div>
+      <small>© <span id="year">2026</span> Kibabu Studios</small>
     </div>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-  </script>
 </body>
 </html>
